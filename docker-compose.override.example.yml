@@ -1,0 +1,8 @@
+version: '3'
+services:
+    mysql:
+        ports:
+            - "3306:3306"
+    php:
+        ports:
+            - "8000:8000"

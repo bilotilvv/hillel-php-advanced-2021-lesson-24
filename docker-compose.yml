@@ -1,0 +1,35 @@
+version: '3'
+services:
+    mysql:
+        restart: always
+        image: mysql:8.0.27
+        command: --default-authentication-plugin=mysql_native_password
+        environment:
+            TZ: Europe/Kiev
+            MYSQL_ROOT_PASSWORD: 123123q
+            MYSQL_DATABASE: family_budget
+        volumes:
+            - mysql-data:/var/lib/mysql
+
+    php:
+        build:
+            context: .
+            dockerfile: docker/dev/php/Dockerfile
+            args:
+                USER_ID: "${DOCKER_COMPOSE__USER_ID:-1000}"
+                GROUP_ID: "${DOCKER_COMPOSE__GROUP_ID:-1000}"
+        stdin_open: true
+        tty: true
+        hostname: family-budget
+        volumes:
+            - ./:/app
+            - ./docker/dev/php/php.ini:/usr/local/etc/php/php.ini
+            - ./docker/dev/.bashrc:/home/student/.bashrc
+            # It helps install packages from cache
+            #- composer-cache:/home/student/.composer
+        working_dir: /app
+        user:  ${DOCKER_COMPOSE__USER_ID:-1000}:${DOCKER_COMPOSE__GROUP_ID:-1000}
+
+volumes:
+    composer-cache:
+    mysql-data:

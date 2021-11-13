@@ -1,0 +1,124 @@
+{
+  "rabbit_version": "3.9.7",
+  "rabbitmq_version": "3.9.7",
+  "product_name": "RabbitMQ",
+  "product_version": "3.9.7",
+  "users": [
+    {
+      "name": "guest",
+      "password_hash": "r7QgiDKA8iIK4qyEFjagRl91ysDS7zD05yr/3T/TJMFKm706",
+      "hashing_algorithm": "rabbit_password_hashing_sha256",
+      "tags": [
+        "administrator"
+      ],
+      "limits": {}
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ],
+  "permissions": [
+    {
+      "user": "guest",
+      "vhost": "/",
+      "configure": ".*",
+      "write": ".*",
+      "read": ".*"
+    }
+  ],
+  "topic_permissions": [],
+  "parameters": [],
+  "global_parameters": [
+    {
+      "name": "cluster_name",
+      "value": "student@hillel"
+    },
+    {
+      "name": "internal_cluster_id",
+      "value": "rabbitmq-cluster-id-8QqkVO4HkoGHXuOq53RtVg"
+    }
+  ],
+  "policies": [],
+  "queues": [
+    {
+      "name": "task",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "message_bus_dead_letter",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    },
+    {
+      "name": "logger",
+      "vhost": "/",
+      "durable": true,
+      "auto_delete": false,
+      "arguments": {}
+    }
+  ],
+  "exchanges": [
+    {
+      "name": "task",
+      "vhost": "/",
+      "type": "direct",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "message_bus_dead_letter",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {}
+    },
+    {
+      "name": "message_bus",
+      "vhost": "/",
+      "type": "topic",
+      "durable": true,
+      "auto_delete": false,
+      "internal": false,
+      "arguments": {
+        "alternate-exchange": "message_bus_dead_letter"
+      }
+    }
+  ],
+  "bindings": [
+    {
+      "source": "message_bus",
+      "vhost": "/",
+      "destination": "logger",
+      "destination_type": "queue",
+      "routing_key": "log.#",
+      "arguments": {}
+    },
+    {
+      "source": "message_bus_dead_letter",
+      "vhost": "/",
+      "destination": "message_bus_dead_letter",
+      "destination_type": "queue",
+      "routing_key": "#",
+      "arguments": {}
+    },
+    {
+      "source": "task",
+      "vhost": "/",
+      "destination": "task",
+      "destination_type": "queue",
+      "routing_key": "",
+      "arguments": {}
+    }
+  ]
+}
