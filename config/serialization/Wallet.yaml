@@ -1,0 +1,8 @@
+#App\Entity\Category:
+#    attributes:
+#        categoryId:
+#            groups: ['read']
+#        name:
+#            groups: ['read', 'write']
+#        type:
+#            groups: ['read']

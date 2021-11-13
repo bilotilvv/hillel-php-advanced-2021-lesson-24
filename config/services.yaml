@@ -29,3 +29,13 @@ services:
             -   format: "%%datetime%% %%start_tag%%%%level_name%%%%end_tag%% [%%channel%%] %%start_tag%%%%message%%%%end_tag%% %%context%%\n"
                 colors: true
                 date_format: 'Y-m-d H:i:s'
+
+#    api.wallet.search_filter:
+#        parent: 'api_platform.doctrine.orm.search_filter'
+#        arguments: [ { currency: 'exact', name: 'partial' } ]
+#        tags:  [ 'api_platform.filter' ]
+#        # The following are mandatory only if a _defaults section is defined with inverted values.
+#        # You may want to isolate filters in a dedicated file to avoid adding the following lines (by adding them in the defaults section)
+#        autowire: false
+#        autoconfigure: false
+#        public: false

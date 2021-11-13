@@ -1,0 +1,8 @@
+#App\Entity\Wallet:
+#    attributes:
+#        walletId:
+#            groups: ['read']
+#        name:
+#            groups: ['read', 'write']
+#        currency:
+#            groups: ['read']

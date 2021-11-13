@@ -1,0 +1,29 @@
+#App\Entity\Wallet:
+#    collectionOperations:
+#        get:
+#            filters: ['api.wallet.search_filter']
+#    itemOperations:
+#        get: ~
+#        patch: ~
+#        delete: ~
+#        get_categories:
+#            method: 'GET'
+#            path: '/wallets/{walletId}/categories'
+#            controller: App\Controller\WalletController
+#    attributes:
+#        normalization_context:
+#            groups: ['read']
+#        denormalization_context:
+#            groups: ['write']
+#
+#App\Entity\Category:
+#    collectionOperations:
+#        get: ~
+#    itemOperations:
+#        get: ~
+#        delete: ~
+#    attributes:
+#        normalization_context:
+#            groups: ['read']
+#        denormalization_context:
+#            groups: ['write']

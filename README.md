@@ -1,23 +1,27 @@
 # How to run application
 
 ```bash
+# Extra config to bind ports
+cp docker-compose.override.example.yml docker-compose.override.yml
 # run docker composer services
 docker-compose up -d
 # exec php container
 docker-compose exec php bash
 # install dependencies inside `php` container
 composer install
-# run console inside `php` container 
+# run DB migrations
+bin/console doctrine:migration:migrate
+# run console inside `php` container
 bin/console
 ```
 
-# How to bind ports
+# How to run web server
 
 ```bash
-cp docker-compose.override.example.yml docker-compose.override.yml
+symfony serve -d
 ```
 
-RabbitMQ Management UI (user: guest, password: guest): http://localhost:15672/
+API Docs http://localhost:8000/api
 
 # How to change user ID in php docker container
 
@@ -45,19 +49,42 @@ docker-compose build
 # Example how application works
 
 ```bash
-student@hillel-php-advanced-2021[docker][/app]: bin/console hillel:task:publish 'Hello, RabbitMQ World!' -vvv
-2021-10-16 15:27:02 INFO      [app] Publishing message ...  ["message_body_raw" => "Hello, RabbitMQ World!"]
-2021-10-16 15:27:02 INFO      [app] Message was published  ["message_body_raw" => "Hello, RabbitMQ World!"]
+student@family-budget[docker][/app]: bin/console f:w:c Cash USD -c -vvv
 
-student@hillel-php-advanced-2021[docker][/app]: bin/console rabbitmq:consumer task -vvv
-2021-10-16 15:27:06 INFO      [app] Received message  ["message_body_raw" => "Hello, RabbitMQ World!"]
+ [OK] New Wallet #4
+
+ [OK] With income categories:
+      Award
+      Gift
+      Salary
+      Selling
+      Other Income
+
+ [OK] With expense categories:
+      Food & Beverage
+      Education
+      Entertainment
+      Gifts & Donations
+      Health & Fitness
+      Shopping
+      Fees & Charges
+      Transportation
+      Other Expense
 ```
-
-# Tips
-
-- Setup exchanges/bindings/queues in RabbitMQ
 ```bash
-bin/console rabbitmq:setup-fabric
+student@family-budget[docker][/app]: bin/console wallet:add-category 'Online Services'
+
+ Choice wallet:
+  [4] Cash, USD
+  [6] Cash, UAH
+ > 6
+
+ Choice category type:
+  [0] income
+  [1] expense
+ > expense
+
+ [OK] Done
 ```
 
 # PHPStorm plugins
@@ -66,16 +93,8 @@ bin/console rabbitmq:setup-fabric
 
 # Useful links
 
+- https://api-platform.com/docs/
 - https://getcomposer.org/
 - https://www.php.net/supported-versions
 - https://symfony.com/doc/current/index.html
-- https://www.enterpriseintegrationpatterns.com/patterns/messaging/
 - https://hub.docker.com/_/php
-- https://hub.docker.com/_/rabbitmq
-- https://www.rabbitmq.com/
-- https://www.rabbitmq.com/tutorials/tutorial-one-php.html
-- https://www.rabbitmq.com/tutorials/tutorial-two-php.html
-- https://www.rabbitmq.com/tutorials/tutorial-three-php.html
-- https://www.rabbitmq.com/tutorials/tutorial-five-php.html
-- https://www.rabbitmq.com/tutorials/tutorial-six-php.html
-- https://www.rabbitmq.com/tutorials/tutorial-seven-php.html
