@@ -38,7 +38,7 @@ class Wallet
     /**
      * @var string
      * @ORM\Column(type="string", length=3)
-     * @Assert\Currency()
+     * Assert\Currency()
      */
     private $currency;
 

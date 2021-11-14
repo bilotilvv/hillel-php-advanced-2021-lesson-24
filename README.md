@@ -72,7 +72,7 @@ student@family-budget[docker][/app]: bin/console f:w:c Cash USD -c -vvv
       Other Expense
 ```
 ```bash
-student@family-budget[docker][/app]: bin/console wallet:add-category 'Online Services'
+student@family-budget[docker][/app]: bin/console family-budget:wallet:add-category 'Online Services'
 
  Choice wallet:
   [4] Cash, USD

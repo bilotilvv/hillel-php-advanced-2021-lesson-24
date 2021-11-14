@@ -21,6 +21,7 @@
 #        get: ~
 #    itemOperations:
 #        get: ~
+#        patch: ~
 #        delete: ~
 #    attributes:
 #        normalization_context:

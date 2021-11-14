@@ -13,7 +13,7 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class WalletAddCategoryCommand extends Command
 {
-    protected static $defaultName = 'wallet:add-category';
+    protected static $defaultName = 'family-budget:wallet:add-category';
     protected static $defaultDescription = 'Add new category to wallet';
 
     /** @var EntityManagerInterface */
@@ -68,7 +68,7 @@ class WalletAddCategoryCommand extends Command
         if ('income' === $categoryType) {
             $wallet->addIncomeCategory($categoryName);
         } elseif ('expense' === $categoryType) {
-            $wallet->addIncomeCategory($categoryName);
+            $wallet->addExpenseCategory($categoryName);
         } else {
             $io->error(sprintf('Unexpected category type: "%s"', $categoryType));
 

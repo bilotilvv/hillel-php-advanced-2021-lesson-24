@@ -1,8 +1,8 @@
-#App\Entity\Category:
+#App\Entity\Wallet:
 #    attributes:
-#        categoryId:
+#        walletId:
 #            groups: ['read']
 #        name:
 #            groups: ['read', 'write']
-#        type:
+#        currency:
 #            groups: ['read']
